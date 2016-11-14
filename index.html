@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WebGL simple shader</title>
+    <link rel="stylesheet" href="">
+    <style type="text/css" media="screen">
+        html, body {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+
+        }
+
+    </style>
+</head>
+<body onload="start()">
+<canvas id="gl">
+    No canvas API
+</canvas>
+
+<script id="shader-fs" type="x-shader/x-fragment">
+    	varying lowp vec4 vColor;
+
+      void main(void) {
+        gl_FragColor = vColor;
+      }
+
+</script>
+
+
+<script id="shader-vs" type="x-shader/x-vertex">
+      attribute vec3 aVertexPosition;
+      attribute vec4 aVertexColor;
+
+      uniform mat4 uMVMatrix;
+      uniform mat4 uPMatrix;
+
+      varying lowp vec4 vColor;
+
+      void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vColor = aVertexColor;
+      }
+
+
+</script>
+
+<script src="sylvester.js"></script>
+<script src="glUtils.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
